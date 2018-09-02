@@ -6,3 +6,6 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: true
+server:
+  servlet:
+    context-path: /order
