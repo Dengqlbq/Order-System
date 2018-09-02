@@ -1,8 +1,8 @@
 package com.deng.order.controller;
 
-import com.deng.order.VO.ProductInfoVO;
-import com.deng.order.VO.ProductVO;
-import com.deng.order.VO.ResultVO;
+import com.deng.order.vo.ProductInfoVO;
+import com.deng.order.vo.ProductVO;
+import com.deng.order.vo.ResultVO;
 import com.deng.order.dataobject.ProductCategory;
 import com.deng.order.dataobject.ProductInfo;
 import com.deng.order.service.CategoryService;
@@ -33,6 +33,11 @@ public class BuyerProductController {
     @Autowired
     private CategoryService categoryService;
 
+    /**
+     * 按分类返回所有上架商品
+     *
+     * @return ResultVO
+     */
     @GetMapping("/list")
     public ResultVO list() {
         // 1. 查询所有上架商品

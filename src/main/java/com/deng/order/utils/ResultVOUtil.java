@@ -1,6 +1,6 @@
 package com.deng.order.utils;
 
-import com.deng.order.VO.ResultVO;
+import com.deng.order.vo.ResultVO;
 
 /**
  * @description:

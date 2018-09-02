@@ -1,4 +1,4 @@
-package com.deng.order.VO;
+package com.deng.order.vo;
 
 
 import lombok.Data;
