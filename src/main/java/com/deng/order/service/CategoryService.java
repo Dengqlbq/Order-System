@@ -4,7 +4,7 @@ import com.deng.order.dataobject.ProductCategory;
 import java.util.List;
 
 /**
- * @description: 类目
+ * @description: 商品类目
  * @author: Deng
  * @create: 2018/9/2
  */

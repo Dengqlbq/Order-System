@@ -11,13 +11,10 @@ import lombok.Getter;
 public enum PayStatusEnum {
 
     /**
-     * 等待支付
+     *
      */
     WAIT(0, "等待支付"),
 
-    /**
-     * 支付成功
-     */
     SUCCESS(1, "支付成功");
 
     private Integer code;

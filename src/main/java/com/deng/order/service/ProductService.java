@@ -1,6 +1,7 @@
 package com.deng.order.service;
 
 import com.deng.order.dataobject.ProductInfo;
+import com.deng.order.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -44,4 +45,18 @@ public interface ProductService {
      * @return 新增/更新后的商品
      */
     ProductInfo save(ProductInfo productInfo);
+
+    /**
+     * 批量增加商品库存
+     *
+     * @param cartDTOList 购物车列表
+     */
+    void increaseStock(List<CartDTO> cartDTOList);
+
+    /**
+     * 批量减少库存
+     *
+     * @param cartDTOList 购物车列表
+     */
+    void decreaseStock(List<CartDTO> cartDTOList);
 }

@@ -3,7 +3,7 @@ package com.deng.order.utils;
 import com.deng.order.vo.ResultVO;
 
 /**
- * @description:
+ * @description: http请求返回的最外层对象Util
  * @author: Deng
  * @create: 2018/9/2
  */

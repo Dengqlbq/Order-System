@@ -12,13 +12,10 @@ import lombok.Getter;
 public enum ProductStatusEnum {
 
     /**
-     * 商品上架
+     *
      */
     UP(0, "商品上架"),
 
-    /**
-     * 商品下架
-     */
     DOWN(1, "商品下架");
 
     private Integer code;

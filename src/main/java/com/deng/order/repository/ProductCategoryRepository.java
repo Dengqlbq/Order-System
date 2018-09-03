@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 商品类目
  * @author: Deng
  * @create: 2018/9/2
  */
