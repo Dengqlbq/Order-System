@@ -43,7 +43,7 @@ public interface OrderService {
      * @param orderDTO
      * @return
      */
-    OrderDTO cancle(OrderDTO orderDTO);
+    OrderDTO cancel(OrderDTO orderDTO);
 
     /**
      * 完结订单

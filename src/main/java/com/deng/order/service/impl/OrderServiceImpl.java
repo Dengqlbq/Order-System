@@ -1,6 +1,6 @@
 package com.deng.order.service.impl;
 
-import com.deng.order.converter.OrderMaster2OrderDTOConverter;
+import com.deng.order.utils.converter.OrderMaster2OrderDTOConverter;
 import com.deng.order.dataobject.OrderDetail;
 import com.deng.order.dataobject.OrderMaster;
 import com.deng.order.dataobject.ProductInfo;
@@ -77,8 +77,8 @@ public class OrderServiceImpl implements OrderService {
 
         // 2. 订单主表入库
         OrderMaster orderMaster = new OrderMaster();
+        orderDTO.setOrderId(ORDER_ID);
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        orderMaster.setOrderId(ORDER_ID);
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
         orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
         orderMaster.setOrderAmount(orderAmount);
@@ -98,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
 
-        List<OrderDetail> orderDetailList = orderDetailRepository.findByOrOrderId(orderId);
+        List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
         if (CollectionUtils.isEmpty(orderDetailList)) {
             log.error("[查询订单]: 订单详情为空 OrderId: {}", orderId);
             throw new SellException(ResultEnum.ORDER_DETAIL_EMPTY);
@@ -108,6 +108,7 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
         OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(orderMaster, orderDTO);
+        orderDTO.setOrderDetailList(orderDetailList);
         orderDTO.setCartDTOList(cartDTOList);
 
         return orderDTO;
@@ -122,7 +123,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDTO cancle(OrderDTO orderDTO) {
+    public OrderDTO cancel(OrderDTO orderDTO) {
         // 1. 判断订单状态
         if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
             log.error("[取消订单]: 订单状态错误 OrderId: {} OrderStatus: {}", orderDTO.getOrderId(), orderDTO.getOrderStatus());

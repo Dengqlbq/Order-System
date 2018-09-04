@@ -1,6 +1,8 @@
 package com.deng.order.dto;
 
 import com.deng.order.dataobject.OrderDetail;
+import com.deng.order.utils.serializer.Date2LongSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -40,11 +42,19 @@ public class OrderDTO {
     private Integer payStatus;
 
     /** 创建时间 */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
     /** 修改时间 */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     /** 购物车列表 */
     List<CartDTO> cartDTOList;
+
+    /**
+     * 订单详情列表
+     * 当初接口未考虑完全，导致获取主订单详情时没有对应字段，现在补上
+     */
+    List<OrderDetail> orderDetailList;
 }

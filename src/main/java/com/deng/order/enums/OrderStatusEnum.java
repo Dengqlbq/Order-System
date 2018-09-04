@@ -1,6 +1,5 @@
 package com.deng.order.enums;
 
-import lombok.Data;
 import lombok.Getter;
 
 /**

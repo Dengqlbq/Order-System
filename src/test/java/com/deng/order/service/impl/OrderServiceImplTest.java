@@ -28,14 +28,14 @@ public class OrderServiceImplTest {
 
     private final String BUYER_OPENID = "1101120";
 
-    private final String ORDER_ID = "1535963069827546834";
+    private final String ORDER_ID = "1536036949118756563";
 
     @Test
     public void create() {
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setBuyerName("一个人");
+        orderDTO.setBuyerName("二个人");
         orderDTO.setBuyerAddress("华南");
-        orderDTO.setBuyerPhone("15622222222");
+        orderDTO.setBuyerPhone("15622222233");
         orderDTO.setBuyerOpenid(BUYER_OPENID);
 
         //购物车
@@ -56,15 +56,15 @@ public class OrderServiceImplTest {
 
     @Test
     public void findList() {
-        PageRequest pageRequest = new PageRequest(0, 2);
+        PageRequest pageRequest = PageRequest.of(0, 2);
         Page<OrderDTO> orderDTOList = orderService.findList(BUYER_OPENID, pageRequest);
         Assert.assertNotEquals(0, orderDTOList.getTotalElements());
     }
 
     @Test
-    public void cancle() {
+    public void cancel() {
         OrderDTO orderDTO = orderService.findOne(ORDER_ID);
-        OrderDTO result = orderService.cancle(orderDTO);
+        OrderDTO result = orderService.cancel(orderDTO);
         Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
     }
 

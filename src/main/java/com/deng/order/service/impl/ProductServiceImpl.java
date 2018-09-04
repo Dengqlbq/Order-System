@@ -7,6 +7,7 @@ import com.deng.order.enums.ResultEnum;
 import com.deng.order.exception.SellException;
 import com.deng.order.repository.ProductInfoRepository;
 import com.deng.order.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import java.util.List;
  * @create: 2018/9/2
  */
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -52,6 +54,7 @@ public class ProductServiceImpl implements ProductService {
         for (CartDTO cartDTO : cartDTOList) {
             ProductInfo productInfo = repository.findById(cartDTO.getProductId()).orElse(null);
             if (productInfo == null) {
+                log.error("[增加库存]: 商品不存在 ProductId: {}", cartDTO.getProductId());
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
 
@@ -67,6 +70,7 @@ public class ProductServiceImpl implements ProductService {
         for (CartDTO cartDTO : cartDTOList) {
             ProductInfo productInfo = repository.getOne(cartDTO.getProductId());
             if (productInfo == null) {
+                log.error("[减少 库存]: 商品不存在 ProductId: {}", cartDTO.getProductId());
                 throw  new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
 
