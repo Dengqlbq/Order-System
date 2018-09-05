@@ -23,13 +23,7 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public OrderDTO findOrderOne(String openid, String orderId) {
-        OrderDTO result = checkOrderOwner(openid, orderId);
-        if (result == null) {
-            return null;
-        }
-        // 因为更改OrderDTO时考虑不充分导致有这些繁琐的逻辑
-        result.setCartDTOList(null);
-        return result;
+        return checkOrderOwner(openid, orderId);
     }
 
     @Override

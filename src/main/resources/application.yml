@@ -10,4 +10,4 @@ spring:
     default-property-inclusion: non_null
 server:
   servlet:
-    context-path: /order
+    context-path: /order_system

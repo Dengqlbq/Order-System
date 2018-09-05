@@ -8,7 +8,7 @@ import lombok.Getter;
  * @create: 2018/9/2
  */
 @Getter
-public enum OrderStatusEnum {
+public enum OrderStatusEnum implements CodeEnum{
 
     /**
      *

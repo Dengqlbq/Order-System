@@ -38,6 +38,14 @@ public interface OrderService {
     Page<OrderDTO> findList(String buyerOpenid, Pageable page);
 
     /**
+     * 查询所有订单
+     *
+     * @param page 分页
+     * @return 订单列表
+     */
+    Page<OrderDTO> findList(Pageable page);
+
+    /**
      * 取消订单
      *
      * @param orderDTO
@@ -60,4 +68,13 @@ public interface OrderService {
      * @return
      */
     OrderDTO paid(OrderDTO orderDTO);
+
+    /**
+     * 获取订单总数
+     * 由于当前版本PageImpl无法直接获取totalPages
+     * 则获取总数后除以传过来的size即为总页数
+     *
+     * @return 订单总数
+     */
+    long count();
 }

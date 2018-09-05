@@ -32,6 +32,10 @@ public enum ResultEnum {
     CART_EMPTY(8, "购物车为空"),
 
     ORDER_OWNER_ERROR(9, "订单不属于当前用户"),
+
+    ORDER_CANCEL_SUCCESS(10, "订单取消成功"),
+
+    ORDER_FINISH_SUCCESS(11, "订单完结成功"),
     ;
 
     private Integer code;
