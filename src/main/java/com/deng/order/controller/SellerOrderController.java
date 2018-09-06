@@ -4,6 +4,7 @@ import com.deng.order.dto.OrderDTO;
 import com.deng.order.enums.ResultEnum;
 import com.deng.order.exception.SellException;
 import com.deng.order.service.OrderService;
+import com.deng.order.utils.MapUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,25 +60,19 @@ public class SellerOrderController {
      * 取消订单
      *
      * @param orderId 订单id
-     * @param map map
      * @return 取消结果
      */
     @GetMapping("/cancel")
-    public ModelAndView cancel(@RequestParam("orderId") String orderId, Map<String, Object> map) {
+    public ModelAndView cancel(@RequestParam("orderId") String orderId) {
         try {
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.cancel(orderDTO);
         } catch (SellException e) {
             log.error("[卖家端取消订单]: {}", e.getMessage());
-
-            map.put("message", e.getMessage());
-            map.put("redirectUrl", REDIRECT_URL);
-            return new ModelAndView("common/error", map);
+            return new ModelAndView("common/error", MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
         }
 
-        map.put("message", ResultEnum.ORDER_CANCEL_SUCCESS.getMessage());
-        map.put("redirectUrl", REDIRECT_URL);
-        return new ModelAndView("common/success", map);
+        return new ModelAndView("common/success", MapUtil.redirectMap(ResultEnum.ORDER_CANCEL_SUCCESS.getMessage(), REDIRECT_URL));
     }
 
     /**
@@ -94,31 +89,29 @@ public class SellerOrderController {
             orderDTO = orderService.findOne(orderId);
         } catch (SellException e) {
             log.error("[卖家端查询订单详情]: {}", e.getMessage());
-
-            map.put("message", e.getMessage());
-            map.put("redirectUrl", REDIRECT_URL);
-            return new ModelAndView("common/error", map);
+            return new ModelAndView("common/error", MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
         }
 
         map.put("orderDTO", orderDTO);
         return new ModelAndView("order/detail", map);
     }
 
+    /**
+     * 完结订单
+     *
+     * @param orderId 订单id
+     * @return 完结结果
+     */
     @GetMapping("/finish")
-    public ModelAndView finish(@RequestParam("orderId") String orderId, Map<String, Object> map) {
+    public ModelAndView finish(@RequestParam("orderId") String orderId) {
         try {
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.finish(orderDTO);
         } catch (SellException e) {
             log.error("[卖家端完结订单]: {}", e.getMessage());
-
-            map.put("message", e.getMessage());
-            map.put("redirectUrl", REDIRECT_URL);
-            return new ModelAndView("common/error", map);
+            return new ModelAndView("common/error", MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
         }
 
-        map.put("message", ResultEnum.ORDER_FINISH_SUCCESS.getMessage());
-        map.put("redirectUrl", REDIRECT_URL);
-        return new ModelAndView("common/success", map);
+        return new ModelAndView("common/success", MapUtil.redirectMap(ResultEnum.ORDER_FINISH_SUCCESS.getMessage(), REDIRECT_URL));
     }
 }

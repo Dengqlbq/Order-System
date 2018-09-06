@@ -36,6 +36,12 @@ public enum ResultEnum {
     ORDER_CANCEL_SUCCESS(10, "订单取消成功"),
 
     ORDER_FINISH_SUCCESS(11, "订单完结成功"),
+
+    PRODUCT_STATUS_ERROR(12, "商品状态错误"),
+
+    PRODUCT_UP_SUCCESS(13, "商品上架成功"),
+
+    PRODUCT_DOWN_SUCCESS(14, "商品下架成功"),
     ;
 
     private Integer code;

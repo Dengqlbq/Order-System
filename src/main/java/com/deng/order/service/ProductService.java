@@ -59,4 +59,29 @@ public interface ProductService {
      * @param cartDTOList 购物车列表
      */
     void decreaseStock(List<CartDTO> cartDTOList);
+
+    /**
+     * 获取商品总数
+     * 由于当前版本PageImpl无法直接获取totalPages
+     * 则获取总数后除以传过来的size即为总页数
+     *
+     * @return 商品总数
+     */
+    long count();
+
+    /**
+     * 上架商品
+     *
+     * @param productId 商品id
+     * @return 上架后的商品
+     */
+    ProductInfo up(String productId);
+
+    /**
+     * 下架商品
+     *
+     * @param productId 商品id
+     * @return 下架后的商品
+     */
+    ProductInfo down(String productId);
 }

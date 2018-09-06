@@ -35,7 +35,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void findAll() {
-        PageRequest pageRequest = new PageRequest(0, 2);
+        PageRequest pageRequest = PageRequest.of(0, 2);
         Page<ProductInfo> result = productService.findAll(pageRequest);
         Assert.assertEquals(1, result.getTotalElements());
     }
@@ -45,5 +45,17 @@ public class ProductServiceImplTest {
         ProductInfo productInfo = productService.findOne("456");
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
         Assert.assertNotNull(productService.save(productInfo));
+    }
+
+    @Test
+    public void up() {
+        ProductInfo productInfo = productService.up("123");
+        Assert.assertEquals(ProductStatusEnum.UP, productInfo.getProductStatusEnum());
+    }
+
+    @Test
+    public void down() {
+        ProductInfo productInfo = productService.down("123");
+        Assert.assertEquals(ProductStatusEnum.DOWN, productInfo.getProductStatusEnum());
     }
 }

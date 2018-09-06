@@ -70,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
         for (CartDTO cartDTO : cartDTOList) {
             ProductInfo productInfo = repository.getOne(cartDTO.getProductId());
             if (productInfo == null) {
-                log.error("[减少 库存]: 商品不存在 ProductId: {}", cartDTO.getProductId());
+                log.error("[减少库存]: 商品不存在 ProductId: {}", cartDTO.getProductId());
                 throw  new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
 
@@ -82,5 +82,44 @@ public class ProductServiceImpl implements ProductService {
             productInfo.setProductStock(result);
             repository.save(productInfo);
         }
+    }
+
+    @Override
+    public long count() {
+        return repository.count();
+    }
+
+    @Override
+    public ProductInfo up(String productId) {
+        ProductInfo productInfo = findOne(productId);
+        if (productId == null) {
+            log.error("[商品上架]: 商品不存在 ProductId: {}", productId);
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+
+        if (productInfo.getProductStatus().equals(ProductStatusEnum.UP.getCode())) {
+            log.error("[商品上架]: 商品状态错误 ProductStatus: {}", productInfo.getProductStatus());
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        return repository.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo down(String productId) {
+        ProductInfo productInfo = findOne(productId);
+        if (productId == null) {
+            log.error("[商品下架]: 商品不存在 ProductId: {}", productId);
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+
+        if (productInfo.getProductStatus().equals(ProductStatusEnum.DOWN.getCode())) {
+            log.error("[商品下架]: 商品状态错误 ProductStatus: {}", productInfo.getProductStatus());
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        return repository.save(productInfo);
     }
 }
