@@ -1,20 +1,30 @@
 package com.deng.order.controller;
 
+import com.deng.order.dataobject.ProductCategory;
 import com.deng.order.dataobject.ProductInfo;
 import com.deng.order.enums.ResultEnum;
 import com.deng.order.exception.SellException;
+import com.deng.order.form.ProductForm;
+import com.deng.order.service.CategoryService;
 import com.deng.order.service.ProductService;
+import com.deng.order.utils.KeyUtil;
 import com.deng.order.utils.MapUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -30,7 +40,17 @@ public class SellerProductController {
     @Autowired
     private ProductService productService;
 
-    private final String REDIRECT_URL = "/order_system/seller/product/list";
+    @Autowired
+    private CategoryService categoryService;
+
+    @Value("${redirect.seller.product}")
+    private String REDIRECT_URL;
+
+    @Value("${view.error}")
+    private String ERROR_VIEW;
+
+    @Value("${view.success}")
+    private String SUCCESS_VIEW;
 
     /**
      * 商品列表
@@ -67,10 +87,10 @@ public class SellerProductController {
             productService.up(productId);
         } catch (SellException e) {
             log.error("[商品上架]: {}", e.getMessage());
-            return new ModelAndView("common/error", MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
+            return new ModelAndView(ERROR_VIEW, MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
         }
 
-        return new ModelAndView("common/success", MapUtil.redirectMap(ResultEnum.PRODUCT_UP_SUCCESS.getMessage(), REDIRECT_URL));
+        return new ModelAndView(SUCCESS_VIEW, MapUtil.redirectMap(ResultEnum.PRODUCT_UP_SUCCESS.getMessage(), REDIRECT_URL));
     }
 
     /**
@@ -85,9 +105,58 @@ public class SellerProductController {
             productService.down(productId);
         } catch (SellException e) {
             log.error("[商品下架]: {}", e.getMessage());
-            return new ModelAndView("common/error", MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
+            return new ModelAndView(ERROR_VIEW, MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
         }
 
-        return new ModelAndView("common/success", MapUtil.redirectMap(ResultEnum.PRODUCT_DOWN_SUCCESS.getMessage(), REDIRECT_URL));
+        return new ModelAndView(SUCCESS_VIEW, MapUtil.redirectMap(ResultEnum.PRODUCT_DOWN_SUCCESS.getMessage(), REDIRECT_URL));
+    }
+
+    /**
+     * 新增或修改商品
+     *
+     * @param productId 商品id，为空则新增，否则修改
+     * @param map map
+     * @return 新增或修改页面
+     */
+    @GetMapping("/index")
+    public ModelAndView index(@RequestParam(value = "productId", required = false) String productId, Map<String, Object> map) {
+        if (!StringUtils.isEmpty(productId)) {
+            map.put("productInfo", productService.findOne(productId));
+        }
+
+        map.put("categoryList", categoryService.findAll());
+        return new ModelAndView("product/index", map);
+    }
+
+    /**
+     * 根据前端POST过来的FORM新增或修改商品
+     *
+     * @param productForm 前端POST过来的FORM
+     * @param bindingResult bindingResult
+     * @return 新增或修改结果
+     */
+    @PostMapping("/save")
+    public ModelAndView save(@Valid ProductForm productForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            log.error("[新增或修改商品]: {}", bindingResult.getFieldError().getDefaultMessage());
+            return new ModelAndView(ERROR_VIEW, MapUtil.redirectMap(bindingResult.getFieldError().getDefaultMessage(), REDIRECT_URL));
+        }
+
+        try {
+            ProductInfo productInfo = new ProductInfo();
+            if (!StringUtils.isEmpty(productForm.getProductId())) {
+                productInfo = productService.findOne(productForm.getProductId());
+            } else {
+                productForm.setProductId(KeyUtil.genUniqueKey());
+            }
+
+            BeanUtils.copyProperties(productForm, productInfo);
+            productService.save(productInfo);
+        } catch (Exception e) {
+            log.error("[新增或修改商品]: {}", e.getMessage());
+            return new ModelAndView(ERROR_VIEW, MapUtil.redirectMap(e.getMessage(), REDIRECT_URL));
+        }
+
+        return new ModelAndView(SUCCESS_VIEW, MapUtil.redirectMap(ResultEnum.PRODUCT_UPDATE_SUCCESS.getMessage(), REDIRECT_URL));
     }
 }

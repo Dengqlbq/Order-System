@@ -36,11 +36,11 @@
                             <td>${OrderDTO.getOrderStatusEnum().message}</td>
                             <td>${OrderDTO.getPayStatusEnum().message}</td>
                             <td>${OrderDTO.createTime}</td>
-                            <td><a href="/order_system/seller/order/detail?orderId=${OrderDTO.getOrderId()}">详情</a> </td>
+                            <td><a href="/order_system/seller/order/detail?orderId=${OrderDTO.getOrderId()}">详情</a></td>
                             <td>
-                                    <#if OrderDTO.getOrderStatusEnum().getMessage() == "新订单">
-                                        <a href="/order_system/seller/order/cancel?orderId=${OrderDTO.getOrderId()}">取消</a>
-                                    </#if>
+                                <#if OrderDTO.getOrderStatusEnum().getMessage() == "新订单">
+                                    <a href="/order_system/seller/order/cancel?orderId=${OrderDTO.getOrderId()}">取消</a>
+                                </#if>
                             </td>
                         </tr>
                         </#list>

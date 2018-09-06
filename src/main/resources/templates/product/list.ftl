@@ -38,7 +38,7 @@
                                     <td>${productInfo.categoryType}</td>
                                     <td>${productInfo.createTime}</td>
                                     <td>${productInfo.updateTime}</td>
-                                    <td><a href="/order_system/seller/product/update?productId=${productInfo.productId}">修改</a> </td>
+                                    <td><a href="/order_system/seller/product/index?productId=${productInfo.productId}">修改</a> </td>
                                     <td>
                                         <#if productInfo.getProductStatusEnum().getMessage() == "商品上架">
                                             <a href="/order_system/seller/product/down?productId=${productInfo.productId}">下架</a>

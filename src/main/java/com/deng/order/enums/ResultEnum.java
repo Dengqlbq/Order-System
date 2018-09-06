@@ -42,6 +42,10 @@ public enum ResultEnum {
     PRODUCT_UP_SUCCESS(13, "商品上架成功"),
 
     PRODUCT_DOWN_SUCCESS(14, "商品下架成功"),
+
+    PRODUCT_UPDATE_SUCCESS(15, "商品新增或修改成功"),
+
+    CATEGORY_UPDATE_SUCCESS(16, "类目新增或修改成功"),
     ;
 
     private Integer code;
