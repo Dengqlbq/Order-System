@@ -3,7 +3,7 @@
     <!-- 项目名称 -->
     <contextName>myApp1 contextName</contextName>
     <!-- 属性 -->
-    <property name="LOG_PATH" value="/Volumes/H/Java/log"/>
+    <property name="LOG_PATH" value="/var/log/order_system"/>
 
     <!-- Insert the current time formatted as "yyyyMMdd'T'HHmmss" under
        the key "bySecond" into the logger context. This value will be
