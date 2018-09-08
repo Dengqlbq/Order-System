@@ -26,3 +26,4 @@
 /.nb-gradle/
 
 src/main/java/.DS_Store
+src/main/resources/static/.DS_Store
