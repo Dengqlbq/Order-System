@@ -79,5 +79,69 @@
                 </div>
             </div>
         </div>
+
+        <!-- websocket提示框 -->
+
+        <div class="modal fade" id="dingdong" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            提醒
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        你有新的订单 !
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="javascript:document.getElementById('notice').pause()" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button onclick="location.href=redirect" type="button" class="btn btn-primary">查看</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 音乐 -->
+        <audio id="notice" loop="loop">
+            <source src="/order_system/mp3/song.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- websocket通信 -->
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            var websocket = null
+            var redirect = '/order_system/seller/order/detail?orderId='
+
+            websocket = new WebSocket('ws://localhost:8080/order_system/webSocket');
+
+
+            websocket.onopen = function (event) {
+                console.log('建立连接')
+            }
+
+            websocket.onclose = function (event) {
+                console.log('断开连接')
+            }
+
+            websocket.onmessage = function (event) {
+                console.log('收到消息: ' + event.data)
+
+                redirect = redirect + event.data
+                // 提示框
+                $('#dingdong').modal('show')
+                // 音乐
+                document.getElementById('notice').play()
+            }
+
+            websocket.onerror = function (event) {
+                alert('websocket通信发生错误')
+            }
+
+            websocket.onbeforeunload = function (event) {
+                websocket.close()
+            }
+        </script>
     </body>
 </html>

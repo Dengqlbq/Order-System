@@ -21,7 +21,7 @@
 });
 </script>
  <!--SIGN UP-->
- <h1>Hello Word !</h1>
+ <h1>HELLO WORLD !</h1>
 <div class="login-form">
 	<div class="close"> </div>
 		<div class="head-info">

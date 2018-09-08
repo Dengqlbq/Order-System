@@ -15,6 +15,7 @@ import com.deng.order.repository.OrderMasterRepository;
 import com.deng.order.service.OrderService;
 import com.deng.order.service.ProductService;
 import com.deng.order.utils.KeyUtil;
+import com.deng.order.websocket.WebSocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private WebSocket webSocket;
 
     @Override
     @Transactional
@@ -86,6 +90,9 @@ public class OrderServiceImpl implements OrderService {
 
         // 3. 扣库存
         productService.decreaseStock(cartDTOList);
+
+        // 4. 向后台页面发送消息
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }
