@@ -9,6 +9,12 @@ import com.deng.order.vo.ResultVO;
  */
 public class ResultVOUtil {
 
+    /**
+     * 成功
+     *
+     * @param obj 数据对象
+     * @return ResultVO
+     */
     public static ResultVO success(Object obj) {
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(0);
@@ -18,10 +24,23 @@ public class ResultVOUtil {
         return resultVO;
     }
 
+
+    /**
+     * 成功
+     *
+     * @return ResultVO
+     */
     public static ResultVO success() {
         return success(null);
     }
 
+    /**
+     * 失败
+     *
+     * @param code code
+     * @param msg 提示信息
+     * @return ResultVO
+     */
     public static ResultVO error(Integer code, String msg) {
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(code);

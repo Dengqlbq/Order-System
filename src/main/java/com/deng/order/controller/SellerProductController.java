@@ -1,6 +1,5 @@
 package com.deng.order.controller;
 
-import com.deng.order.dataobject.ProductCategory;
 import com.deng.order.dataobject.ProductInfo;
 import com.deng.order.enums.ResultEnum;
 import com.deng.order.exception.SellException;

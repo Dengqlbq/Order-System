@@ -46,6 +46,10 @@ public enum ResultEnum {
     PRODUCT_UPDATE_SUCCESS(15, "商品新增或修改成功"),
 
     CATEGORY_UPDATE_SUCCESS(16, "类目新增或修改成功"),
+
+    LOGIN_FAIL(17, "用户名或密码不正确"),
+
+    LOGOUT_SUCCESS(18, "登出成功"),
     ;
 
     private Integer code;

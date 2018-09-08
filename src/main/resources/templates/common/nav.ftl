@@ -26,7 +26,7 @@
         </li>
 
         <li>
-            <a href="/order_system/seller/logout"><i class="fa fa-fw fa-list-alt"></i> 登出</a>
+            <a href="/order_system/seller/user/logout"><i class="fa fa-fw fa-list-alt"></i> 登出</a>
         </li>
     </ul>
 </nav>
