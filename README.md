@@ -1,6 +1,5 @@
 # Order-System
 
-### 基于Spring Boot点餐系统后台
 
 ```
    ____          _           _____           _                 
@@ -41,10 +40,8 @@ websocket = new WebSocket('ws://{OVERRIDE}/order_system/webSocket');
 ```
 
 ```
-cd Order-System
 mvn clean package -Dmaven.test.skip=true
-cd target
-java -jar order_system.jar
+java -jar target/order_system.jar
 ```
 
 ---
@@ -53,20 +50,20 @@ java -jar order_system.jar
 
 #### Seller :
 
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/login.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/orderlist.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/orderdetail.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/productlist.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/productmodify.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/productadd.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/login.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/orderlist.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/orderdetail.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/productlist.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/productmodify.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/productadd.png)<br>
 ![](https://github.com/Dengqlbq/Order-System/blob/master/image/category.png)
 
 ####  Buyer :
 
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_list.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_detail.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_create.png)
-![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_cancel.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_list.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_detail.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_create.png)<br>
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_cancel.png)<br>
 ![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_productlist.png)
 
 
