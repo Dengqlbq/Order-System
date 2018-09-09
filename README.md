@@ -13,13 +13,11 @@
                                    |___/                       
 ```
 
-![](https://img.shields.io/badge/java-1.8-blue.svg)
-
-![](https://img.shields.io/badge/springboot-2.0.4-blue.svg)
+![](https://img.shields.io/badge/java-1.8-blue.svg) ![](https://img.shields.io/badge/springboot-2.0.4-blue.svg)
 
 测试地址: http://dengqlbq.xyz:8080/order_system/seller/user/index
 
-测试账号：man，haha | women，hehe (登录页加载慢)
+测试账号: man，haha | women，hehe (登录页加载慢)
 
 ---
 
@@ -55,7 +53,21 @@ java -jar order_system.jar
 
 #### Seller :
 
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/login.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/orderlist.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/orderdetail.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/productlist.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/productmodify.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/productadd.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/category.png)
+
 ####  Buyer :
+
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_list.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_detail.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_create.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_order_cancel.png)
+![](https://github.com/Dengqlbq/Order-System/blob/master/image/b_productlist.png)
 
 
 
